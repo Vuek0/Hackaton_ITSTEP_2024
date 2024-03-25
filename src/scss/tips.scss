@@ -1,0 +1,39 @@
+@import "variables.scss";
+
+.tips{
+    padding: 100px 0;
+    background: $primary-color;
+}
+
+.tips__container{
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+.cards__wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.tips__header{
+    color: #fff;
+    font-size: 50px;
+}
+.tips__subheader{
+    color: $secondary-dark;
+}
+
+.tips__top{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+@media(max-width: 425px){
+    .cards__wrapper{
+        flex-direction: column;
+    }
+    .tips__card{
+        width: 100% !important;
+    }
+}

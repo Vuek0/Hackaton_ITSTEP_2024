@@ -1,0 +1,17 @@
+@import "variables.scss";
+
+.tips__card{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    color: #fff;
+    width: 40%;
+}
+
+.tips__card__icon{
+    width: 32px;
+}
+
+.tips__card__text{
+    color: $secondary-dark;
+}
