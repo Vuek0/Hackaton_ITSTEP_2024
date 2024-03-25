@@ -20,10 +20,7 @@ function createHash(method, str){
                             createHash(md5, str);
                             break;
                         case "crc32":
-                            // let hash1 = CRC32.str(str);
-                            // output.textContent = hash1;
-                            // navigator.clipboard.writeText(hash);
-                            openModal();
+                            // Оно не работает :D 
                             break;
                         case "sha1":
                             createHash(sha1, str);
