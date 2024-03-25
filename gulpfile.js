@@ -5,6 +5,7 @@ const include = require('gulp-file-include')
 const concat = require('gulp-concat')
 const del = require('del')
 const autoprefixer = require('gulp-autoprefixer')
+const browserSync = require('browser-sync')
 const sync = require('browser-sync').create()
 
 function html(){
@@ -43,10 +44,10 @@ function server(){
     server: './public'
   })
 
-  watch('src/**.html', html).on('save', sync.reload)
-  watch('src/parts/**.html', html).on('save', sync.reload)
-  watch('src/scss/**.scss', scss).on('save',sync.reload)
-  watch('src/js/**.js', js).on('save', sync.reload)
+  watch('src/**.html', html).on('change', sync.reload)
+  watch('src/parts/**.html', html).on('change', sync.reload)
+  watch('src/scss/**.scss', scss).on('change',sync.reload)
+  watch('src/js/**.js', js).on('change', sync.reload)
 }
 
 // exports.build = series(clear, scss, html)
