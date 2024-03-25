@@ -16,12 +16,28 @@
 .header__logo{
     height: 60px;
     width: 70%;
+    transition: 1s;
+    &:hover{
+        transform: scale(1.2);
+    }
 }
 
 .menu__list{
     display: flex;
     gap: 32px;
     list-style: none;
+
+    li{
+        a{
+            transition: 1s;
+            &:hover{
+                font-size: 22px;
+                color: #000;
+            }
+        }
+        
+    }
+
 }
 
 .header__burger{
@@ -70,12 +86,12 @@
         display: block;
         position: absolute;
         text-align: center;
-        top: -120%;
+        top: -60%;
         background: rgba($color: $primary-color, $alpha: 1);
         left: 0;
         padding: 100px 20px 80px 20px;
         width: 100vw;
-        transition: 1.5s;
+        transition: 1s;
         ul{
             display: block;
             li{
