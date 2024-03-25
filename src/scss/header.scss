@@ -87,6 +87,7 @@
         position: absolute;
         text-align: center;
         top: -60%;
+        -moz-transform: translateY(-50px);
         background: rgba($color: $primary-color, $alpha: 1);
         left: 0;
         padding: 100px 20px 80px 20px;

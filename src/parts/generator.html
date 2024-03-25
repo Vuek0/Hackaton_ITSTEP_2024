@@ -1,0 +1,46 @@
+<section class="password">
+    <div class="password__container container">
+        <h1 class="password__header">Сгенерировать безопасный пароль</h1>
+
+        <form class="password__form">
+            <div class="input__wrapper">
+                <input type="text" id="passwordInput" disabled><br style="display: none;" class="mobile__space"/>
+                <button id="generatePassword">Сгенерировать</button>
+                <button id="copyPassword">Скопировать</button>
+            </div>
+            <div class="input__wrapper">
+                <div class="input__wrapper__top">
+                    <label for="passwordRange">Длина пароля: </label>
+                    <p id="showLength">1</p>
+                    <input type="range" id="passwordRange" value="5" min="5" max="30">
+                </div>
+                <div class="input__wrapper__bottom">
+                    <div>
+                        <label for="highRegisterCheck">
+                            Верхний регистр
+                            <input type="checkbox" name="highRegister" id="highRegisterCheck">
+                        </label>
+    
+                        <label for="lowRegisterCheck">
+                            Нижний регистр
+                            <input type="checkbox" name="lowRegister" id="lowRegisterCheck">
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <label for="digitsCheck">
+                            Числа
+                            <input type="checkbox" name="digits" id="digitsCheck">
+                        </label>
+    
+                        <label for="symbolsCheck">
+                            Символы
+                            <input type="checkbox" name="symbols" id="symbolsCheck">
+                        </label>
+                    </div>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

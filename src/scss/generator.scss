@@ -1,0 +1,95 @@
+@import "variables.scss";
+
+.password{
+    padding: 70px 0;
+}
+
+.password__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#passwordInput{
+    background: #fff;
+    border: 1px solid $primary-color;
+}
+
+.password__form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .input__wrapper:nth-child(1){
+        input{
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button{
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+    .input__wrapper:nth-child(2){
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+.password__header{
+    text-align: center;
+    font-size: 60px;
+}
+
+.input__wrapper__top{
+    display: flex;
+    gap: 10px;
+}
+.input__wrapper__bottom{
+    display: flex;
+    gap: 15px;
+    div{
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+        input{
+            border: 1px solid rgba($color: #000000, $alpha: 0.5);
+            width: 20px;
+            height: 20px;
+            -webkit-appearance: none;
+            appearance: none;
+            box-shadow: 2px 2px 0px 1px rgba($color: #000000, $alpha: 0.5);
+            transition: 1s;
+            cursor: pointer;
+            &:checked{
+                background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCI+CjxwYXRoIGQ9Ik0gNDEuOTM3NSA4LjYyNSBDIDQxLjI3MzQzOCA4LjY0ODQzOCA0MC42NjQwNjMgOSA0MC4zMTI1IDkuNTYyNSBMIDIxLjUgMzguMzQzNzUgTCA5LjMxMjUgMjcuODEyNSBDIDguNzg5MDYzIDI3LjI2OTUzMSA4LjAwMzkwNiAyNy4wNjY0MDYgNy4yODEyNSAyNy4yOTI5NjkgQyA2LjU2MjUgMjcuNTE1NjI1IDYuMDI3MzQ0IDI4LjEyNSA1LjkwMjM0NCAyOC44NjcxODggQyA1Ljc3NzM0NCAyOS42MTMyODEgNi4wNzgxMjUgMzAuMzYzMjgxIDYuNjg3NSAzMC44MTI1IEwgMjAuNjI1IDQyLjg3NSBDIDIxLjA2MjUgNDMuMjQ2MDk0IDIxLjY0MDYyNSA0My40MTAxNTYgMjIuMjA3MDMxIDQzLjMyODEyNSBDIDIyLjc3NzM0NCA0My4yNDIxODggMjMuMjgxMjUgNDIuOTE3OTY5IDIzLjU5Mzc1IDQyLjQzNzUgTCA0My42ODc1IDExLjc1IEMgNDQuMTE3MTg4IDExLjEyMTA5NCA0NC4xNTIzNDQgMTAuMzA4NTk0IDQzLjc4MTI1IDkuNjQ0NTMxIEMgNDMuNDEwMTU2IDguOTg0Mzc1IDQyLjY5NTMxMyA4LjU4OTg0NCA0MS45Mzc1IDguNjI1IFoiPjwvcGF0aD4KPC9zdmc+') 50% 50% no-repeat;
+                background-size: 100%;
+                transform: translateX(2px) translateY(2px);
+                box-shadow: none;
+                border: 1px solid rgba($color: #000000, $alpha: 0.1);
+            }    
+        }
+        
+    }
+}
+
+@media(max-width: 425px){
+    .password__container{
+        gap: 10px;
+    }
+    .password__header{
+        font-size: 40px;
+    }
+    #passwordInput{
+        margin-bottom: 10px;
+    }
+    .password__form{
+        align-items: center;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .mobile__space{
+        display: block !important;
+    }
+}
