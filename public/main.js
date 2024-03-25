@@ -27,8 +27,18 @@ const symbols = "@#$%&*([]";
 const digits = "123456789";
 const highRegister = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowRegister = "abcdefghijklmnopqrstuvwxyz";
+const modal = document.querySelector('.modal');
+const modalClose = document.querySelector(".modal__close");
 
 // code
+
+function openModal(){
+    modal.classList.add("open");
+    modalClose.addEventListener("click", function closeModal(){
+        modal.classList.remove("open");
+        modalClose.removeEventListener("click", closeModal);
+    })
+}
 
 if(passwordLength!=null){
     passwordLength.textContent = range.value
@@ -50,7 +60,7 @@ if(generateButton!=null){
             !lowRegisterCheck.checked && 
             !digitsCheck.checked && 
             !symbolsCheck.checked){
-            alert("Должен быть отмечен хотя бы один пункт.");
+            openModal();
         }
         else{
             if(highRegisterCheck.checked){

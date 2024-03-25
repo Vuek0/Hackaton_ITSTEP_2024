@@ -11,13 +11,18 @@
   "license": "ISC",
   "dependencies": {
     "browser-sync": "^3.0.2",
+    "crc-32": "^1.2.2",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^4.0.1",
     "gulp-file-include": "^2.3.0",
-    "gulp-sass": "^5.1.0"
+    "gulp-sass": "^5.1.0",
+    "js-sha1": "^0.7.0",
+    "js-sha256": "^0.11.0",
+    "js-sha512": "^0.9.0",
+    "md5": "^2.3.0"
   },
   "devDependencies": {
     "sass": "^1.69.5"

@@ -6,6 +6,11 @@
     gap: 25px;
     color: #fff;
     width: 40%;
+    transition: 1s;
+
+    &:hover{
+        transform: scale(1.2);
+    }
 }
 
 .tips__card__icon{
