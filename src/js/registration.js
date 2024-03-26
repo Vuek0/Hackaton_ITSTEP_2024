@@ -16,6 +16,7 @@ function getCookie(name) {
   }
 if(localStorage.getItem("quantityOfUsers") == null){
     localStorage.setItem("quantityOfUsers", 0);
+    document.cookie = "id_user=;expires=-1;"
 }
 if(getCookie("id_user")){
     regLink.style.display = "none";

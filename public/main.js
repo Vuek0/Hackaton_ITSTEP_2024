@@ -195,6 +195,9 @@ const outputName = document.querySelector("#profile__name");
 const outputSurname = document.querySelector("#profile__surname");
 const outputEmail = document.querySelector("#profile__email");
 const exitButton = document.querySelector("#profile__exit");
+let userName;
+let userSurname;
+let userEmail;
 if(outputName!=null && outputSurname!=null && outputEmail!=null){
     for(let key in localStorage){
         let object = JSON.parse(localStorage.getItem(key));
@@ -216,6 +219,12 @@ if(outputName!=null && outputSurname!=null && outputEmail!=null){
     outputEmail.textContent = `Email: ${userEmail}`;
     
 }
+
+if(userName == undefined && userSurname == undefined && userEmail == undefined){
+    if(window.location.href.includes("/profile.html")){
+        window.location.href = "/index.html"
+    }
+}
 const form = document.querySelector(".registration__form");
 const email = document.querySelector("#emailInput");
 const name = document.querySelector("#nameInput");
@@ -234,6 +243,7 @@ function getCookie(name) {
   }
 if(localStorage.getItem("quantityOfUsers") == null){
     localStorage.setItem("quantityOfUsers", 0);
+    document.cookie = "id_user=;expires=-1;"
 }
 if(getCookie("id_user")){
     regLink.style.display = "none";
