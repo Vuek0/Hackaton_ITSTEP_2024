@@ -18,6 +18,19 @@ if(localStorage.getItem("quantityOfUsers") == null){
     localStorage.setItem("quantityOfUsers", 0);
     document.cookie = "id_user=;expires=-1;"
 }
+
+function isEmailAlreadyDeclared(mail){
+    for(let key in localStorage){
+        let object = JSON.parse(localStorage.getItem(key));
+        if (!localStorage.hasOwnProperty(key)) {
+            continue; 
+        }
+        if(object.email === mail){
+            return true;
+        }
+    }
+}
+
 if(getCookie("id_user")){
     regLink.style.display = "none";
     for(let key in localStorage){
@@ -70,6 +83,14 @@ if(form!=null){
             openModal();
             output.textContent = 'Пароли не совпадают.';
             return;
+        }
+        if(quantity > 0){
+            if(isEmailAlreadyDeclared(email.value)){
+                openModal();
+                output.textContent = "Этот имейл уже зарегестрирован!";
+                return;
+            }
+            
         }
         
         quantity++;
