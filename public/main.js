@@ -16,10 +16,11 @@ const encryptButton = document.querySelector("#encrypt__button");
 const encryptInput = document.querySelector("#encrypt__input");
 const radios = document.querySelectorAll(".encrypt__radio");
 const output = document.querySelector(".modal__output")
-const modalCopyButton = document.querySelector("modal__copy")
+const modal__subtitle = document.querySelector(".modal__subtitle")
 function createHash(method, str){
     let hash = method(str);
     output.textContent = hash;
+    console.log(hash)
     navigator.clipboard.writeText(hash);
     openModal();
 }
@@ -27,29 +28,36 @@ function createHash(method, str){
         encryptButton.addEventListener("click", (e)=>{
             e.preventDefault();
             let str = encryptInput.value;
-            radios.forEach(elem => {
-                if(elem.checked){
-                    switch (elem.id) {
-                        case "md5":
-                            createHash(md5, str);
-                            break;
-                        case "crc32":
-                            // Оно не работает :D 
-                            break;
-                        case "sha1":
-                            createHash(sha1, str);
-                            break;
-                        case "sha256":
-                            createHash(sha256, str);
-                            break;
-                        case "sha512":
-                            createHash(sha512, str)
-                            break;
-                        default:
-                            break;
+            if(str!==""){
+                modal__subtitle.textContent = "Хэш уже в вашем буфере обмена!";
+                radios.forEach(elem => {
+                    if(elem.checked){
+                        switch (elem.id) {
+                            case "md5":
+                                createHash(md5, str);
+                                break;
+                            case "crc32":
+                                // Оно не работает :D 
+                                break;
+                            case "sha1":
+                                createHash(sha1, str);
+                                break;
+                            case "sha256":
+                                createHash(sha256, str);
+                                break;
+                            case "sha512":
+                                createHash(sha512, str)
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
-            })
+                })
+            }else{
+                output.textContent = "Должен быть введен текст для шифрования";
+                openModal();
+            }
+            
         })
     }
 
@@ -130,6 +138,84 @@ if(generateButton!=null){
     })
 }
 
+const form1 = document.querySelector(".login__form");
+if(form1!=null){
+    form1.addEventListener("submit", (e)=>{
+      
+        e.preventDefault();
+        if(!(email.value).includes("@")){
+            openModal();
+            output.textContent = "в email необходим символ '@'";
+            return;
+        }
+        
+        if(!(email.value.split("@")[1].includes('.'))){
+            openModal();
+            output.textContent = "Введен некорректный email!"
+            return;
+        }
+        
+        if (pass.value.length < 6) {
+            openModal();
+            output.textContent = 'Пароль должен содержать не менее 6 символов.';
+            return;
+        }
+        if (pass.value !== confirmPass.value) {
+            openModal();
+            output.textContent = 'Пароли не совпадают.';
+            return;
+        }
+    
+        let newPass = md5(pass.value);
+        for(let key in localStorage){
+            let object = JSON.parse(localStorage.getItem(key));
+            if (!localStorage.hasOwnProperty(key)) {
+                continue; 
+            }
+            if(object.email === email.value && object.password === newPass){
+                let date = new Date(Date.now() + 86400e3);
+                date = date.toUTCString()
+                document.cookie = `id_user=${object.identificator}; expires=${date}`;
+                window.location.href = "/index.html";
+            }
+        }
+        if(!getCookie("id_user")){
+            openModal();
+            output.textContent = 'Такого аккаунта не найдено';
+            email.textContent = "";
+            pass.textContent = "";
+            confirmPass.textContent = "";
+        }
+        
+    })
+}
+
+
+const outputName = document.querySelector("#profile__name");
+const outputSurname = document.querySelector("#profile__surname");
+const outputEmail = document.querySelector("#profile__email");
+const exitButton = document.querySelector("#profile__exit");
+if(outputName!=null && outputSurname!=null && outputEmail!=null){
+    for(let key in localStorage){
+        let object = JSON.parse(localStorage.getItem(key));
+        if (!localStorage.hasOwnProperty(key)) {
+            continue; 
+        }
+        if(object.identificator == getCookie("id_user")){
+            userName = object.name;
+            userSurname = object.surname;
+            userEmail = object.email
+            exitButton.addEventListener("click", ()=>{
+                document.cookie = "id_user=;expires=-1"
+                window.location.href = "/index.html"
+            })
+        }
+    }
+    outputName.textContent = `Имя: ${userName}`;
+    outputSurname.textContent = `Фамилия: ${userSurname}`;
+    outputEmail.textContent = `Email: ${userEmail}`;
+    
+}
 const form = document.querySelector(".registration__form");
 const email = document.querySelector("#emailInput");
 const name = document.querySelector("#nameInput");
@@ -137,43 +223,88 @@ const surname = document.querySelector("#surnameInput");
 const pass = document.querySelector("#passInput");
 const confirmPass = document.querySelector("#confirmPass");
 const button = document.querySelector("#submit");
+const regLink = document.querySelector("#registration__link");
+const loginLinkLi = document.querySelector("#login__link__li");
+const loginLink = document.querySelector("#login__link");
+
 let data = {};
-form.addEventListener("submit", (e)=>{
-    e.preventDefault();
-    if(!(email.value).includes("@")){
-        openModal();
-        output.textContent = "в email необходим символ '@'";
-        return;
+function getCookie(name) {
+    let cookie = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+    return cookie ? cookie.split('=')[1] : null;
+  }
+if(localStorage.getItem("quantityOfUsers") == null){
+    localStorage.setItem("quantityOfUsers", 0);
+}
+if(getCookie("id_user")){
+    regLink.style.display = "none";
+    for(let key in localStorage){
+        let object = JSON.parse(localStorage.getItem(key));
+        if (!localStorage.hasOwnProperty(key)) {
+            continue; 
+        }
+        if(object.identificator == getCookie("id_user")){
+            loginLink.innerHTML = object.name;
+            loginLink.setAttribute("href", "/profile.html");
+        }
     }
+    if(window.location.href.includes("/registration.html")){
+        window.location.href = "/index.html";
+    }
+    if(window.location.href.includes("/login.html")){
+        window.location.href = "/index.html";
+    }
+}
+if(form!=null){
+    
+    let quantity = Number(localStorage.getItem("quantityOfUsers"));
+    
+    form.addEventListener("submit", (e)=>{  
+        e.preventDefault();
+        if(!(email.value).includes("@")){
+            openModal();
+            output.textContent = "в email необходим символ '@'";
+            return;
+        }
+    
+        if(!(email.value.split("@")[1].includes('.'))){
+            openModal();
+            output.textContent = "Введен некорректный email!"
+            return;
+        }
+    
+        if(name.value.length < 2){
+            openModal();
+            output.textContent = "Имя не может содержать только один символ";
+            return;
+        }
+    
+        if (pass.value.length < 6) {
+            openModal();
+            output.textContent = 'Пароль должен содержать не менее 6 символов.';
+            return;
+        }
+        if (pass.value !== confirmPass.value) {
+            openModal();
+            output.textContent = 'Пароли не совпадают.';
+            return;
+        }
+        
+        quantity++;
+        localStorage.setItem("quantityOfUsers", quantity);
 
-    if(!(email.value.split("@")[1].includes('.'))){
-        openModal();
-        output.textContent = "Введен некорректный email!"
-        return;
-    }
+        let identificator = md5(localStorage.getItem("quantityOfUsers"));
+        data = {
+            name : name.value,
+            surname : surname.value,
+            email : email.value,
+            password : md5(pass.value),
+            identificator : identificator
+        }
 
-    if(name.value.length < 2){
-        openModal();
-        output.textContent = "Имя не может содержать только один символ";
-        return;
-    }
-
-    if (pass.value.length < 6) {
-        openModal();
-        output.textContent = 'Пароль должен содержать не менее 6 символов.';
-        return;
-    }
-    if (pass.value !== confirmPass.value) {
-        openModal();
-        output.textContent = 'Пароли не совпадают.';
-        return;
-    }
-    data = {
-        name : name.value,
-        surname : surname.value,
-        email : email.value,
-        password : pass.value
-    }
-    alert("Вы успешно зарегестрированы, свои данные можете просмотреть в консоли.")
-    console.log(data)
-})
+        localStorage.setItem(`user${quantity}`, JSON.stringify(data));
+        let date = new Date(Date.now() + 86400e3);
+        date = date.toUTCString();
+        document.cookie = `id_user=${identificator}; expires=${date}`;
+        window.location.href = '/index.html'
+    })
+}

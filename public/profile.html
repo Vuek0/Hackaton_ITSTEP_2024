@@ -47,28 +47,17 @@
     </div>
 </header>
 <main>
-    <section class="registration">
-    <div class="registration__container container">
-        <h2>Регистрация</h2>
-        <form class="registration__form">
-            <input type="text" placeholder="Email" id="emailInput" name="email">
-            <input type="text" placeholder="Name" name="name" id="nameInput">
-            <input type="text" placeholder="Surname" name="surname" id="surnameInput">
-            <input type="password" placeholder="Password" id="passInput" name="password">
-            <input type="password" placeholder="Confirm password" id="confirmPass">
-            <button type="submit" class="btn" id="submit">Зарегестрироваться</button>
-        </form>
-    </div>
-</section>
+    <section class="profile">
+        <div class="profile__container container">
+            <h3>Информация о вашем профиле: </h3>
+            <p id="profile__name"></p>
+            <p id="profile__surname"></p>
+            <p id="profile__email"></p>
+            <button id="profile__exit">Выйти из аккаунта</button>
+        </div>
+    </section>
+    
 
-<div class="modal">
-    <div class="modal__box">
-        <div class="modal__close"><span></span><span></span></div>
-        <p class="modal__output"></p>
-    </div>
-</div>
-
-<script src="md5.js"></script>
 </main>
 <footer>
     <div class="footer__container container">
