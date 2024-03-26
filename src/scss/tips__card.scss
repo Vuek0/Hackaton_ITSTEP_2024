@@ -20,3 +20,9 @@
 .tips__card__text{
     color: $secondary-dark;
 }
+
+@media(max-width: 768px){
+    .tips__card:hover{
+        transform: scale(1);
+    }
+}
